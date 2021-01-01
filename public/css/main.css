@@ -1,0 +1,147 @@
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600");
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Lato&family=Roboto&display=swap');
+
+html, body{
+  font-family: 'Amiri', serif;
+  font-weight: 400;
+  font-size: 1rem !important;
+}
+
+body{
+  line-height: 1.65;
+}
+
+.img-responsive{
+  width:80%;
+  height:auto;
+}
+
+.line{
+  background-color: #937D3F !important;
+}
+
+div.app-bar ul.app-bar-menu li a{
+  font-size: 1.1rem !important;
+  font-weight: bold;
+}
+
+
+
+#body-content {
+  background-color: #111111;
+  color: rgba(255, 255, 255, 0.5);
+  background-image:url("../images/dj_banner.jpg");
+  background-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,.8) 100%), url("../images/dj_banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto !important;
+  width: 100%;
+
+}
+
+#registro-form{
+  font-size: 1.2rem !important;
+  padding:10px;
+  border-radius:2px;
+}
+#registro-form input,#registro-form .input, #registro-form select, #registro-form textarea{
+  background: rgba(0,0,0,.9);
+  border:thin solid rgba(145,145,145,.3) !important;
+  font-size:1rem !important;
+  color:#AEA073 !important;
+}
+
+#nombre,#apellido {
+  text-transform: uppercase;
+}
+
+
+#registro-form .button-group{
+  background:#AEA073 !important;
+
+}
+
+
+#registro-form .drop-container{
+  background: rgba(0,0,0,.9) !important;
+  border:2px solid rgba(174,160,115,.6) !important;
+}
+
+
+#registro-form .select{
+  border:thin solid rgba(145,145,145,.5) !important;
+}
+
+
+
+#registro-form .dropdown-toggle{
+  background: rgba(0,0,0,.3) !important;
+  border:thin solid rgba(174,160,115,.4) !important;
+  color:#AEA073 !important;
+}
+
+
+/*
+#registro-form .default-icon-cross{
+  border-color: red !important;
+}
+*/
+
+#registro-form .dropdown-toggle:hover{
+  border:thin solid rgba(174,160,115,.7) !important;
+}
+
+#registro-form .dropdown-toggle::before{
+  border-color:#AEA073 !important;
+}
+
+
+#login-form .input{
+  background: rgba(0,0,0,.8);
+}
+#login-form input{
+  background: rgba(0,0,0,.7);
+  color:#AEA073 !important;
+}
+
+#ct-login:before{
+
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 2000px rgba(155, 155, 155, .2);
+  filter: blur(5px);
+}
+
+#login-form .default-icon-eye {
+  background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%3Cpath%20fill%3D%22%23000%22%20d%3D%22M16%206c-6.979%200-13.028%204.064-16%2010%202.972%205.936%209.021%2010%2016%2010s13.027-4.064%2016-10c-2.972-5.936-9.021-10-16-10zM23.889%2011.303c1.88%201.199%203.473%202.805%204.67%204.697-1.197%201.891-2.79%203.498-4.67%204.697-2.362%201.507-5.090%202.303-7.889%202.303s-5.527-0.796-7.889-2.303c-1.88-1.199-3.473-2.805-4.67-4.697%201.197-1.891%202.79-3.498%204.67-4.697%200.122-0.078%200.246-0.154%200.371-0.228-0.311%200.854-0.482%201.776-0.482%202.737%200%204.418%203.582%208%208%208s8-3.582%208-8c0-0.962-0.17-1.883-0.482-2.737%200.124%200.074%200.248%200.15%200.371%200.228v0zM16%2013c0%201.657-1.343%203-3%203s-3-1.343-3-3%201.343-3%203-3%203%201.343%203%203z%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A);
+  filter: invert(90%) sepia(55%) saturate(500%) hue-rotate(346deg) brightness(124%) contrast(97%);
+}
+
+#login-form .default-icon-cross {
+  background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%3Cpath%20fill%3D%22%23000%22%20d%3D%22M31.708%2025.708c-0-0-0-0-0-0l-9.708-9.708%209.708-9.708c0-0%200-0%200-0%200.105-0.105%200.18-0.227%200.229-0.357%200.133-0.356%200.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13%200.048-0.252%200.124-0.357%200.228%200%200-0%200-0%200l-9.708%209.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057%200.229l-4.586%204.586c-0.286%200.286-0.361%200.702-0.229%201.057%200.049%200.13%200.124%200.252%200.229%200.357%200%200%200%200%200%200l9.708%209.708-9.708%209.708c-0%200-0%200-0%200-0.104%200.105-0.18%200.227-0.229%200.357-0.133%200.355-0.057%200.771%200.229%201.057l4.586%204.586c0.286%200.286%200.702%200.361%201.057%200.229%200.13-0.049%200.252-0.124%200.357-0.229%200-0%200-0%200-0l9.708-9.708%209.708%209.708c0%200%200%200%200%200%200.105%200.105%200.227%200.18%200.357%200.229%200.356%200.133%200.771%200.057%201.057-0.229l4.586-4.586c0.286-0.286%200.362-0.702%200.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A);
+  filter: invert(90%) sepia(55%) saturate(500%) hue-rotate(346deg) brightness(124%) contrast(97%);
+}
+
+
+ul.ismultiple{
+  display:none;
+}
+
+.error{
+  padding:3px;
+  font-size: .9rem;
+  color:rgba(255,0,0,.8);
+}
+
+#login-form .error{
+  display:block;
+  padding:5px;
+  font-size: .9rem;
+  color:rgba(255,0,0,.8);
+}

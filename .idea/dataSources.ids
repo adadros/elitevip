@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - elitevip2020@localhost" uuid="e28cfdec-b414-4a90-8fb7-93dca8e19fb1">
+    <database-info product="MySQL" version="5.5.5-10.4.11-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.47 ( Revision: fe1903b1ecb4a96a917f7ed3190d80c049b1de29 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="elitevip2020"/>
+      <table id="2" parent="1" name="categoria"/>
+      <table id="3" parent="1" name="categoria_contenido"/>
+      <table id="4" parent="1" name="evento"/>
+      <table id="5" parent="1" name="galerias"/>
+      <table id="6" parent="1" name="imagenes"/>
+      <table id="7" parent="1" name="membresia"/>
+      <table id="8" parent="1" name="migrations"/>
+      <table id="9" parent="1" name="pagos"/>
+      <table id="10" parent="1" name="password_resets"/>
+      <table id="11" parent="1" name="perfil"/>
+      <table id="12" parent="1" name="producto"/>
+      <table id="13" parent="1" name="roles"/>
+      <table id="14" parent="1" name="tipo_producto"/>
+      <table id="15" parent="1" name="usuario"/>
+      <table id="16" parent="1" name="video_stream"/>
+      <column id="17" parent="2" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="18" parent="2" name="nombre">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="19" parent="2" name="visualizaciones">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="20" parent="2" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="21" parent="2" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="22" parent="2" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="23" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="24" parent="3" name="id_categoria">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+      </column>
+      <column id="25" parent="3" name="tipo">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="26" parent="3" name="contenido">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="27" parent="3" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="28" parent="3" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <index id="29" parent="3" name="categoria_contenido_id_categoria_foreign">
+        <columns>id_categoria</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="30" parent="3" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="31" parent="3" name="categoria_contenido_id_categoria_foreign">
+        <columns>id_categoria</columns>
+        <ref-key>~.categoria.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="32" parent="4" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="33" parent="4" name="titulo">
+        <mandatory>1</mandatory>
+        <data-type>linestring</data-type>
+      </column>
+      <column id="34" parent="4" name="descripcion">
+        <mandatory>1</mandatory>
+        <data-type>multilinestring</data-type>
+      </column>
+      <column id="35" parent="4" name="portada">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="36" parent="4" name="galeria">
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="37" parent="4" name="video">
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="38" parent="4" name="privado">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <column id="39" parent="4" name="fecha">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="40" parent="4" name="hora_inicio">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="41" parent="4" name="hora_final">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="42" parent="4" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="43" parent="4" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="44" parent="4" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="45" parent="5" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="46" parent="5" name="galeria_id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="47" parent="5" name="nombre">
+        <mandatory>1</mandatory>
+        <data-type>linestring</data-type>
+      </column>
+      <column id="48" parent="5" name="elemento">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="49" parent="5" name="tipo">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="50" parent="5" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="51" parent="5" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="52" parent="5" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="53" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="54" parent="6" name="src">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="55" parent="6" name="nombre">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="56" parent="6" name="ext">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="57" parent="6" name="thumb">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="58" parent="6" name="size">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="59" parent="6" name="privado">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <column id="60" parent="6" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="61" parent="6" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="62" parent="6" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="63" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="64" parent="7" name="descripcion">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="65" parent="7" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="66" parent="7" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="67" parent="7" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="68" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(10) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="69" parent="8" name="migration">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="70" parent="8" name="batch">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="71" parent="8" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="72" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="73" parent="9" name="uid">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+      </column>
+      <column id="74" parent="9" name="folio">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="75" parent="9" name="factura">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="76" parent="9" name="tipo">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="77" parent="9" name="fecha">
+        <mandatory>1</mandatory>
+        <data-type>date</data-type>
+      </column>
+      <column id="78" parent="9" name="producto">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+      </column>
+      <column id="79" parent="9" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="80" parent="9" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <index id="81" parent="9" name="pagos_producto_foreign">
+        <columns>producto</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="82" parent="9" name="pagos_uid_foreign">
+        <columns>uid</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="83" parent="9" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="84" parent="9" name="pagos_producto_foreign">
+        <columns>producto</columns>
+        <ref-key>~.producto.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="85" parent="9" name="pagos_uid_foreign">
+        <columns>uid</columns>
+        <ref-key>~.usuario.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="86" parent="10" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="87" parent="10" name="token">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="88" parent="10" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <index id="89" parent="10" name="password_resets_email_index">
+        <columns>email</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <column id="90" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="91" parent="11" name="uid">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+      </column>
+      <column id="92" parent="11" name="nombre">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="93" parent="11" name="apellido">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="94" parent="11" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="95" parent="11" name="telefono">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="96" parent="11" name="estado">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="97" parent="11" name="ciudad">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="98" parent="11" name="cp">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="99" parent="11" name="rfc">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="100" parent="11" name="foto">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="101" parent="11" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="102" parent="11" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <index id="103" parent="11" name="perfil_uid_foreign">
+        <columns>uid</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="104" parent="11" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="105" parent="11" name="perfil_uid_foreign">
+        <columns>uid</columns>
+        <ref-key>~.usuario.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="106" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="107" parent="12" name="descripcion">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="108" parent="12" name="precio">
+        <mandatory>1</mandatory>
+        <data-type>double(8,2)</data-type>
+      </column>
+      <column id="109" parent="12" name="descuento">
+        <mandatory>1</mandatory>
+        <data-type>double(8,2)</data-type>
+        <default-expression>&apos;0.00&apos;</default-expression>
+      </column>
+      <column id="110" parent="12" name="tipo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+      </column>
+      <column id="111" parent="12" name="producto">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="112" parent="12" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="113" parent="12" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="114" parent="12" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="115" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="116" parent="13" name="descripcion">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="117" parent="13" name="permisos">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="118" parent="13" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="119" parent="13" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="120" parent="14" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="121" parent="14" name="clave">
+        <mandatory>1</mandatory>
+        <data-type>varchar(3)</data-type>
+      </column>
+      <column id="122" parent="14" name="nombre">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="123" parent="14" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="124" parent="14" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="125" parent="14" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="126" parent="15" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="127" parent="15" name="email">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="128" parent="15" name="email_verified_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="129" parent="15" name="password">
+        <mandatory>1</mandatory>
+        <data-type>varchar(191)</data-type>
+      </column>
+      <column id="130" parent="15" name="rol">
+        <mandatory>1</mandatory>
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="131" parent="15" name="activo">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <column id="132" parent="15" name="remember_token">
+        <data-type>varchar(100)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="133" parent="15" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="134" parent="15" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <index id="135" parent="15" name="usuario_email_unique">
+        <columns>email</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="136" parent="15" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <key id="137" parent="15" name="usuario_email_unique">
+        <columns>email</columns>
+        <underlying-index>usuario_email_unique</underlying-index>
+      </key>
+      <column id="138" parent="16" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20) unsigned</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="139" parent="16" name="calidad">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="140" parent="16" name="bitrate">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="141" parent="16" name="resolucion">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="142" parent="16" name="formato">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="143" parent="16" name="duracion">
+        <data-type>varchar(191)</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="144" parent="16" name="live">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="145" parent="16" name="reproducciones">
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="146" parent="16" name="conexiones">
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="147" parent="16" name="likes">
+        <data-type>int(11)</data-type>
+        <default-expression>&apos;0&apos;</default-expression>
+      </column>
+      <column id="148" parent="16" name="privado">
+        <mandatory>1</mandatory>
+        <data-type>tinyint(1)</data-type>
+      </column>
+      <column id="149" parent="16" name="created_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <column id="150" parent="16" name="updated_at">
+        <data-type>timestamp</data-type>
+        <default-expression>&apos;NULL&apos;</default-expression>
+      </column>
+      <key id="151" parent="16" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+    </database-model>
+  </data-source>
+</component>
