@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
+use App\Evento as Evento;
+use App\EventoFecha as EventoFecha;
+use App\Tickets as Tickets;
 
 
 class AjaxEventController extends Controller
@@ -71,7 +75,6 @@ class AjaxEventController extends Controller
                     'message'=>'La imagen ha sido eliminada',
                     'req'=>$request->input('imagen'),
                     'deleted'=>true
-
                 ]);
 
             }else{
@@ -88,23 +91,96 @@ class AjaxEventController extends Controller
     }
 
 
-    public function guardar(Request $request){
+    public function guardar(Request $request, Evento $evento){
 
         if($request->ajax()){
-            $titulo = $request->input('titulo');
-            $portada = $request->input('portada');
-            $descripcion = $request->input('descripcion');
-            $fechas = $request->input('fechas');
-            $fecha_format = array();
-           
+            $validacion = Validator::make(
+                $request->all(),[
+                    'titulo' => 'required',
+                    'portada' => 'required',
+                    'descripcion' => 'required',
+                    'fechas' => 'required',
+                    'tickets' => 'required',
+                ]
+            );
 
+            if($validacion->passes()) {
 
-            return response()->json([
-                'message'=>'Prueba de guardar datos',
-                'req'=>array($titulo,$portada,$descripcion,$fechas,$fecha_format),
-                'saved'=>true
+                $fechas = $request->input('fechas');
+                $tickets = $request->input('tickets');
 
-            ]);
+                DB::beginTransaction();
+                try {
+
+                    $evento->titulo = $request->input('titulo');
+                    $evento->portada = $request->input('portada');
+                    $evento->descrpcion = $request->input('descripcion');
+                    $evento->save();
+                    $id_evento = $evento->id;
+                    $evento_fechas = [];
+                    $tickets_data = [];
+                    $ticket_count = Tickets::max('id') + 1;
+                    if (isset($fechas)) {
+                        foreach ($fechas as $fecha) {
+                            /**eventos*/
+                            $evento_fechas[] = ['idevento' => $id_evento, 'fecha' => $fecha];
+                            if (isset($tickets)) {
+                                foreach ($tickets as $ticket) {
+                                    $cant = intval($ticket->cantidad);
+                                    if ($cant > 1) {
+                                        for ($i = 0; $i < $cant; $i++) {
+                                            $folio = str_replace('-', '', $fecha) . $ticket->seccion . $ticket->paquete . str_pad($ticket_count, 8, STR_PAD_LEFT);
+                                            $tickets_data[] = [
+                                                "folio" => $folio,
+                                                "idpaquete" => intval($ticket->paquete),
+                                                "idseccion" => intval($ticket->seccion),
+                                                "divisa" => trim($ticket->divisa),
+                                                "precio" => $ticket->precio,
+                                                "idstatus" => 1,
+                                                "fecha" => $fecha,
+                                                "idevento" => $id_evento
+                                            ];
+                                            $ticket_count++;
+                                        }
+                                    } else {
+                                        $folio = str_replace('-', '', $fecha) . $ticket->seccion . $ticket->paquete . str_pad($ticket_count, 8, STR_PAD_LEFT);
+                                        $tickets_data[] = [
+                                            "folio" => $folio,
+                                            "idpaquete" => intval($ticket->paquete),
+                                            "idseccion" => intval($ticket->seccion),
+                                            "divisa" => trim($ticket->divisa),
+                                            "precio" => $ticket->precio,
+                                            "idstatus" => 1,
+                                            "fecha" => $fecha,
+                                            "idevento" => $id_evento
+                                        ];
+                                        $ticket_count++;
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                    EventoFecha::create($evento_fechas);
+                    Tickets::create($tickets_data);
+                    DB::commit();
+                } catch (\Exception $e) {
+                    DB::rollBack();
+                    throw  $e;
+                } catch (\Throwable $e) {
+                    DB::rollBack();
+                    throw $e;
+                }
+                return response()->json([
+                    'message' => 'Lo boletos del evento se han generado, los puedes visualizar en el menú de tickets',
+                    'saved' => true
+                ]);
+            }else{
+                return response()->json([
+                    'message' => $validacion->errors()->all(),
+                    'saved' => false
+                ]);
+            }
         }
 
     }

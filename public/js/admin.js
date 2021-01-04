@@ -32,7 +32,8 @@ Metro.utils.addLocale({
     }
 });
 var jq = jQuery;
-var host = 'https://eliteexperiencevip.com';
+//var host = 'https://eliteexperiencevip.com';
+var host = 'http://localhost:8000';
 moment.locale('es');
 
 
@@ -143,6 +144,12 @@ $( function(){
     if(sselect.length>0){
         var select_seccion = Metro.getPlugin(document.getElementById('tipo'), 'select');
         select_seccion.val(sselect.val());
+    }
+
+    var spaquete = jq("#paquete_selected");
+    if(spaquete.length>0){
+        var select_paquete = Metro.getPlugin(document.getElementById('divisa'), 'select');
+        select_paquete.val(spaquete.val());
     }
 
     
@@ -287,13 +294,18 @@ function saveEvento(){
     });
 
 
-    var descripcion = tinymce.get('descripcion').getContent();
+    //var descripcion = tinymce.get('descripcion').getContent();
+    var descripcion = jq('#descripcion').val();
+    var tickets = getTicketsSecciones();
+
+
 
     var params = {
         titulo : jq("#titulo").val(),
         portada:portada,
         descripcion: descripcion,
-        fechas:fechas
+        fechas:fechas,
+        tickets:tickets
 
     }
     jq.ajaxSetup({
@@ -311,22 +323,45 @@ function saveEvento(){
         cache:false,
         processData:false,
         success:function(data){
-
             console.log(data);
-
         }
 
     });
 
 }
 
+/**metodos tipo variable*/
+
+var changeValuesInEvento = function(_this){
+
+
+    var selected = jq(_this).find('option:selected');
+    var divisa = selected.attr('data-divisa');
+    var precio = selected.attr('data-precio');
+    /**cambio los valores dados en el dialog de agregar secciones*/
+    var select_divisa_add = Metro.getPlugin(document.getElementById('divisa_add'), 'select');
+    var precio_add = document.getElementById('precio_add');
+    if(typeof select_divisa_add != 'undefined'){
+        select_divisa_add.value = divisa;
+    }
+    if(typeof precio_add != 'undefined'){
+        precio_add.value=precio;
+    }
+
+
+
+}
+
+
 function addSeccionInEvent(){
 
     var secciones = jq('#secciones_list > li');
+    var data_divisa_selected = null;
+    var data_precio = null;
     var li_secciones = '';
     if(secciones.length>0){
         secciones.each(function(i,v){
-            li_secciones+='<option value="'+jq(v).attr('data-value')+'">'+jq(v).text()+'</option>';
+            li_secciones+='<option  value="'+jq(v).attr('data-value')+'">'+jq(v).text()+'</option>';
         })
     }
 
@@ -334,9 +369,22 @@ function addSeccionInEvent(){
     var li_paquetes = '';
     if(paquetes.length>0){
         paquetes.each(function(i,v){
-            li_paquetes+='<option value="'+jq(v).attr('data-value')+'">'+jq(v).text()+'</option>';
+            if(i==0){
+                data_divisa_selected = jq(v).attr('data-divisa');
+                data_precio = jq(v).attr('data-precio');
+            }
+            li_paquetes+='<option data-precio="'+jq(v).attr('data-precio')+'" data-divisa="'+jq(v).attr('data-divisa')+'" value="'+jq(v).attr('data-value')+'">'+jq(v).text()+'</option>';
         })
     }
+
+    var divisas = jq('#divisas_list > li');
+    var li_divisas = '';
+    if(divisas.length>0){
+        divisas.each(function(i,v){
+            li_divisas+='<option '+(data_divisa_selected!=null?'selected="selected"':'')+' value="'+jq(v).attr('data-value')+'">'+jq(v).text()+'</option>';
+        })
+    }
+
     
 
     
@@ -354,6 +402,16 @@ function addSeccionInEvent(){
         '   </select>' +
         '</div>' +
         '<div class="form-group">' +
+        '   <label>Divisa</label>' +
+        '   <select id="divisa_add" data-role="select">' +
+        '' +li_divisas+
+        '   </select>' +
+        '</div>' +
+        '<div class="form-group">' +
+        '   <label>Precio</label>' +
+        '   <input type="text" size="180" id="precio_add" value="'+data_precio+'" data-role="input">' +
+        '</div>'+
+        '<div class="form-group">' +
         '   <label>Cantidad</label>' +
         '   <input id="cantidad_add" data-min-value="1" type="number" value="1" class="small" data-role="spinner" data-step="1">' +
         '</div>';
@@ -368,6 +426,7 @@ function addSeccionInEvent(){
                 cls: "js-dialog-close success",
                 onclick: function(){
                     addPanelSeccion();
+
                 }
             },
             {
@@ -377,22 +436,39 @@ function addSeccionInEvent(){
                     return false;
                 }
             }
-        ]
+        ],
+        onDialogCreate:function(){
+            //console.log('se creo el dialog y los elementos existen');
+            /**agrego el evento de change in evento dialog*/
+            var paq = jq('#paquete_add');
+            //console.log('paq',paq);
+            if(paq.length>0){
+                document.getElementById('paquete_add').addEventListener('change',function(evt){
+                    changeValuesInEvento(evt.target);
+                });
+            }
+
+
+        }
     });
+
+
+
+
 
 
 
 
 }
 
-function buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add){
+function buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add,precio_add,divisa_add){
 
 
     var html = '' +
-        '<div class="cell-md-4 cell-sm-6 cell-fs-12">' +
-        '<div id="seccion_'+idseccion+'" data-role="panel" data-title-caption="'+label_seccion+'" data-collapsible="true" data-custom-buttons="BtnSeccion">' +
-        '   <span id="paquete_'+idpaquete+'" class="tag border bd-lightTaupe" data-seccion="'+idseccion+'" data-paquete="'+idpaquete+'" data-cantidad="'+cantidad_add+'" >' +
-        '       <span class="title">'+label_paquete+' </span>' +
+        '<div class="cell-lg-10 cell-md-12 cell-sm-12 cell-fs-12">' +
+        '<div id="seccion_'+idseccion+'" data-role="panel" data-with="80%" data-title-caption="'+label_seccion+'" data-collapsible="true" data-custom-buttons="BtnSeccion">' +
+        '   <span class="tag border bd-lightTaupe" data-seccion="'+idseccion+'" data-paquete="'+idpaquete+'" data-cantidad="'+cantidad_add+'" data-precio="'+precio_add+'" data-divisa="'+divisa_add+'" >' +
+        '       <span class="title">'+label_paquete+' - '+divisa_add+' $'+precio_add+' </span>' +
         '       <span class="cantidad badge inline bg-black fg-white mt-1 mr-1">'+cantidad_add+'</span>' +
         '       <a role="button" onclick="$(this).parent().remove()" class="button bg-red fg-white small"><span class="mif-bin"></span></a>' +
         '   </span>' +
@@ -403,10 +479,10 @@ function buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_a
     return html;
 }
 
-function buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add){
+function buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add,precio_add,divisa_add){
     var html = '' +
-        '   <span id="paquete_'+idpaquete+'" class="tag border bd-lightTaupe" data-seccion="'+idseccion+'" data-paquete="'+idpaquete+'" data-cantidad="'+cantidad_add+'" >' +
-        '       <span class="title">'+label_paquete+' </span>' +
+        '   <span class="tag border bd-lightTaupe" data-seccion="'+idseccion+'" data-paquete="'+idpaquete+'" data-cantidad="'+cantidad_add+'" data-precio="'+precio_add+'" data-divisa="'+divisa_add+'" >' +
+        '       <span class="title">'+label_paquete+' - '+divisa_add+' $'+precio_add+' </span>' +
         '       <span class="cantidad badge inline bg-black fg-white mt-1 mr-1">'+cantidad_add+'</span>' +
         '       <a role="button" onclick="$(this).parent().remove()" class="button bg-red fg-white small"><span class="mif-bin"></span></a>' +
         '   </span>';
@@ -414,13 +490,23 @@ function buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add){
     return html;
 }
 
-function getSeccionesPaquetes(){
-   /* var container_exists = jq('#container_secciones > div').length>0 ? true : false;
+function getTicketsSecciones(){
+    var container_exists = jq('#container_secciones > div').length>0 ? true : false;
      var secciones = [];
      if(container_exists){
-
+        jq('#container_secciones span.tag').each(function(i,v){
+            var dato = jq(v);
+            var ticket = {
+                seccion:dato.attr('data-seccion'),
+                paquete:dato.attr('data-paquete'),
+                divisa:dato.attr('data-divisa'),
+                precio:dato.attr('data-precio'),
+                cantidad:dato.attr('data-cantidad'),
+            }
+            secciones.push(ticket);
+        })
      }
-     return secciones;*/
+     return secciones;
 }
 
 function addPanelSeccion(){
@@ -429,26 +515,35 @@ function addPanelSeccion(){
     var label_seccion = document.getElementById('seccion_add')[document.getElementById('seccion_add').selectedIndex].innerHTML;
     var idpaquete = jq('#paquete_add').val();
     var label_paquete = document.getElementById('paquete_add')[document.getElementById('paquete_add').selectedIndex].innerHTML;
+    var precio_selected = jq('#precio_add').val();
+    var divisa_selected = jq('#divisa_add').val();
     var container_exists = jq('#container_secciones > div').length>0 ? true : false;
     var cantidad_add = jq('#cantidad_add').val();
 
 
-
     if(container_exists){
         if(jq('#seccion_'+idseccion).length>0){
-            if(jq('#paquete_'+idpaquete).length>0){
-                var cant = parseInt(jq('#paquete_'+idpaquete).find('.cantidad').text());
-                var new_cant = parseInt(cantidad_add)+cant;
-                jq('#paquete_'+idpaquete).find('.cantidad').html(new_cant);
-                jq('#paquete_'+idpaquete).attr('data-cantidad',new_cant);
+            var _paquete = jq('#seccion_'+idseccion).find('.tag[data-paquete='+idpaquete+']');
+            if(_paquete.length>0){
+                var precio_tmp = jq(_paquete).attr('data-precio');
+                var divisa_tmp = jq(_paquete).attr('data-divisa');
+
+                if( (divisa_tmp==divisa_selected) && (precio_tmp==precio_selected)  ){
+                    var cant = parseInt(jq(_paquete).find('.cantidad').text());
+                    var new_cant = parseInt(cantidad_add)+cant;
+                    jq(_paquete).find('.cantidad').html(new_cant);
+                    jq(_paquete).attr('data-cantidad',new_cant);
+                }else{
+                    jq('#seccion_'+idseccion).append(buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add,precio_selected,divisa_selected));
+                }
             }else{
-                jq('#seccion_'+idseccion).append(buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add));
+                jq('#seccion_'+idseccion).append(buildPaquete(idseccion,idpaquete,label_paquete,cantidad_add,precio_selected,divisa_selected));
             }
         }else{
-            jq('#container_secciones').append(buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add));
+            jq('#container_secciones').append(buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add,precio_selected,divisa_selected));
         }
     }else{
-        jq('#container_secciones').append(buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add));
+        jq('#container_secciones').append(buildSeccion(idseccion,label_seccion,idpaquete,label_paquete,cantidad_add,precio_selected,divisa_selected));
     }
 
 
@@ -457,15 +552,19 @@ function addPanelSeccion(){
 
 
 /**funciones para paquetes*/
-
 function savePaquete(){
     iniciaLoading();
+
+
+
     var params = {
         action : 'nuevo',
         nombre : jq("#nombre").val(),
+        divisa : jq("#divisa").val(),
         precio: jq("#precio").val(),
         personas: jq("#personas").val()
     }
+
 
     jq.ajaxSetup({
         headers: {
@@ -493,6 +592,7 @@ function savePaquete(){
                 Metro.infobox.create('<h3>Aviso</h3><p>'+data.message+'</p>', 'alert',{
                     onClose:function(){
                         jq("#nombre").val('');
+                        jq("#divisa").val('');
                         jq("#precio").val('');
                         jq("#personas").val('');
                     }
@@ -511,6 +611,7 @@ function updatePaquete(id){
     var params = {
         id:id,
         nombre : jq("#nombre").val(),
+        divisa : jq("#divisa").val(),
         precio: jq("#precio").val(),
         personas: jq("#personas").val()
     }

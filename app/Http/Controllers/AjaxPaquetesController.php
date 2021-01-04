@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Paquete as Paquete;
 
 
+
 class AjaxPaquetesController extends Controller
 {
 
@@ -24,6 +25,7 @@ class AjaxPaquetesController extends Controller
             $validacion = Validator::make(
                 $request->all(),[
                     'nombre' => 'required',
+                    'divisa' => 'required',
                     'precio' => 'required',
                     'personas' => 'required',
                 ]
@@ -31,6 +33,7 @@ class AjaxPaquetesController extends Controller
             if($validacion->passes()){
 
                 $paquete->nombre = $request->input('nombre');
+                $paquete->divisa = $request->input('divisa');
                 $paquete->precio = $request->input('precio');
                 $paquete->personas = $request->input('personas');
                 $paquete->save();
@@ -60,6 +63,7 @@ class AjaxPaquetesController extends Controller
             $validacion = Validator::make(
                 $request->all(),[
                     'nombre' => 'required',
+                    'divisa' => 'required',
                     'precio' => 'required',
                     'personas' => 'required',
                 ]
@@ -69,6 +73,7 @@ class AjaxPaquetesController extends Controller
                 $id= $request->input('id');
                 Paquete::whereId($id)->update([
                     'nombre' => $request->input('nombre'),
+                    'divisa' => $request->input('divisa'),
                     'precio' => $request->input('precio'),
                     'personas' => $request->input('personas'),
                 ]);

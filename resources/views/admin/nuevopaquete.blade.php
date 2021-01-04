@@ -26,7 +26,25 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Precio (Dólares)</label>
+                            <label>Divisa</label>
+                            @if( isset($paquete) )
+                                <input type="hidden" id="paquete_selected" value="{{$paquete->divisa}}">
+                            @endif
+                            <div class="row">
+                                <div class="col-md-5 col-sm-8 col-fs-12">
+                                <select id="divisa" name="divisa" data-role="select">
+                                @if(isset($divisas))
+                                    @foreach($divisas as $divisa)
+                                        <option value="{{$divisa->clave}}">{{$divisa->descripcion}}</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Precio</label>
                             <input data-size="250" id="precio" name="precio" value="{{isset($paquete) ? $paquete->precio : ''}}" type="number" data-role="input">
                         </div>
 
