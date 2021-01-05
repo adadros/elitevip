@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Paquete as Paquete;
 use App\Lugar as Lugar;
+use App\Divisa as Divisa;
 use App\Seccion as Seccion;
 use App\ViewUserProfile as ViewUserProfile;
+use App\ViewTickets as ViewTickets;
+use App\Evento as Evento;
 
 
 
@@ -40,10 +43,48 @@ class AdminController extends Controller
         return view('admin/dashboard',$data);
     }
 
-    public function eventos(){
+    public function eventos(Evento $evento){
         $data['profile'] = $this->getProfile();
+        $data['eventos'] = $evento->all();
         return view('admin/eventos',$data);
     }
+    public function newEvento(Seccion $seccion, Paquete $paquete, Divisa $divisa){
+        $data['profile'] = $this->getProfile();
+        $data['editable'] = false;
+        $data['secciones'] = $seccion->all();
+        $data['paquetes'] = $paquete->all();
+        $data['divisas'] = $divisa->all();
+        return view('admin/nuevoevento',$data);
+    }
+
+    public function editEventos($id,Evento $evento){
+        $data['profile'] = $this->getProfile();
+        $data['id'] = $id;
+        $data['evento'] = $evento->find($id);
+        $data['editable'] = true;
+        return view('admin/eventos',$data);
+    }
+
+    public function tickets($id){
+        $data['profile'] = $this->getProfile();
+        $tickets_filtered = DB::table('view_tickets as vt')
+            ->select(['*'])
+            ->whereRaw('vt.idevento = ?',[$id])
+            ->get();
+        $data['tickets'] = $tickets_filtered;
+
+        return view('admin/tickets',$data);
+    }
+
+    public function editTicket($id,  ViewTickets $view_ticket){
+        $data['profile'] = $this->getProfile();
+        $data['id'] = $id;
+        $data['ticket'] = $view_ticket->find($id);
+        $data['editable'] = true;
+        return view('admin/nuevoticket',$data);
+    }
+
+
 
     public function pagos(){
         $data['profile'] = $this->getProfile();
@@ -82,12 +123,7 @@ class AdminController extends Controller
         return view('admin/opciones',$data);
     }
 
-    public function newEvento(Seccion $seccion, Paquete $paquete){
-        $data['profile'] = $this->getProfile();
-        $data['secciones'] = $seccion->all();
-        $data['paquetes'] = $paquete->all();
-        return view('admin/nuevoevento',$data);
-    }
+
 
 
     /**creando las url para secciones*/
@@ -128,16 +164,18 @@ class AdminController extends Controller
         return view('admin/paquetes',$data);
     }
 
-    public function newPaquete(){
+    public function newPaquete(Divisa $divisa){
         $data['profile'] = $this->getProfile();
         $data['editable'] = false;
+        $data['divisas'] = $divisa->all();
         return view('admin/nuevopaquete',$data);
     }
 
-    public function editPaquete($id, Paquete $paquete){
+    public function editPaquete($id, Paquete $paquete, Divisa $divisa){
         $data['profile'] = $this->getProfile();
         $data['id'] = $id;
         $data['paquete'] = $paquete->find($id);
+        $data['divisas'] = $divisa->all();
         $data['editable'] = true;
         return view('admin/nuevopaquete',$data);
     }

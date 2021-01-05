@@ -17,9 +17,16 @@
 
 <!-- Header -->
 <div data-role="appbar" data-expand-point="md" class="bg-black fg-taupe">
+
+
     <a href="#" class="brand no-hover">
+        <button class="app-bar-item border bg-darkTaupe c-pointer d-none-md mr-5" id="sidebar-toggle-3">
+            <span class="mif-user mif-2x  fg-lightTaupe"></span>
+        </button>
         <img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}">
+
     </a>
+
 
     <ul class="app-bar-menu bg-black fg-taupe">
         <li><a class="fg-lightTaupe-hover" href="{{route('inicio')}}">Inicio</a></li>
@@ -31,15 +38,65 @@
     </ul>
 
 </div>
+<div class="row pos-relative pt-200">
+
+    <aside class="sidebar h-100 op-black-low fg-lightTaupe"
+           data-role="sidebar"
+           data-toggle="#sidebar-toggle-3"
+           id="sidebar"
+           data-shift=".shifted-content"
+           data-static-shift=".shifted-content"
+           data-static="md"
+    >
+
+        <div class="sidebar-header" data-image="{{asset('public/images/dj_banner.jpg')}}">
+            <a href="/" class="fg-white sub-action d-none-md"
+               onclick="Metro.sidebar.close('#sidebar'); return false;">
+                <span class="mif-arrow-left mif-2x"></span>
+            </a>
+            <div class="avatar bg-black">
+                <img class="img-responsive" src="{{asset('public/images/elitevip.svg')}}">
+            </div>
+            <span class="title bg-black fg-white px-2">PERFIL DE USUARIO</span>
+            <span class="subtitle bg-black fg-white px-2">@if(isset($profile)) {{     $profile['nombre'].' '.$profile['apellido']  }}  @else     @endif</span>
+
+        </div>
+        <ul class="sidebar-menu fg-taupe">
+            <li class="group-title fg-darkTaupe">Principal</li>
+            <li><a class="fg-lightTaupe-hover" href="#"><span class="mif-event-available icon"></span>Mis eventos</a></li>
+            <li><a class="fg-lightTaupe-hover" href="#"><span class="mif-shop icon"></span>Mis compras</a></li>
+            <li class="group-title fg-darkTaupe">Configuración</li>
+            <!--<li  class=""><a class="fg-black-hover" href="{{route('admin_opciones')}}"><span class="mif-cogs icon"></span>Opciones</a></li>-->
+            <li><a class="fg-lightTaupe-hover" href="#"><span class="mif-user icon"></span>Mi perfil</a></li>
+            <li class="divider bg-darkTaupe"></li>
+            <li>
+                <a class="fg-lightTaupe-hover"  href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    {{ __('Salir') }}<span class="mif-exit icon"></span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                        </form>
+            </li>
+        </ul>
+    </aside>
 
 
 
-<!-- Nav -->
+
+    <div class="shifted-content h-100 p-ab">
+        <!-- Nav -->
 
 
-<!--content yield-->
+        <!--content yield-->
 
-@yield('content')
+        @yield('content')
+
+
+    </div>
+
+
+
+</div>
 
         <!-- Footer -->
 <!--footer id="footer">

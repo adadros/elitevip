@@ -20,6 +20,7 @@
                     <tr>
                         <th class="sortable-column" data-sortable="true">ID</th>
                         <th class="sortable-column"  data-sortable="true">Nombre</th>
+                        <th>Divisa</th>
                         <th class="sortable-column" data-sortable="true" data-format="money">Precio</th>
                         <th class="sortable-column" data-sortable="true">Cant. Personas</th>
                         <th>Edición</th>
@@ -30,7 +31,8 @@
                         <tr>
                             <td>{{$paquete->id}}</td>
                             <td>{{$paquete->nombre}}</td>
-                            <td>${{$paquete->precio}} dls.</td>
+                            <td>{{$paquete->divisa}}</td>
+                            <td>${{$paquete->precio}}</td>
                             <td>{{$paquete->personas}}</td>
                             <td>
                                 <div class="toolbar">

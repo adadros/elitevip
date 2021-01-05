@@ -48,7 +48,14 @@ Route::post('/admin/seccion/eliminar','AjaxSeccionController@eliminar')->name('e
 /**eventos*/
 Route::get('/admin/eventos','AdminController@eventos')->name('admin_eventos');
 Route::get('/admin/evento/nuevo','AdminController@newEvento')->name('admin_evento_nuevo');
+Route::get('/admin/evento/{id}/editar','AdminController@editEvento')->name('admin_evento_editar');
 Route::post('/admin/evento/guardar','AjaxEventController@guardar')->name('guardar_evento');
+Route::post('/admin/evento/eliminar','AjaxEventController@eliminar')->name('admin_evento_eliminar');
+
+/**tickets*/
+Route::get('/admin/tickets/{id}','AdminController@tickets')->name('admin_tickets');
+Route::get('/admin/ticket/{id}/editar','AdminController@editTicket')->name('admin_ticket_editar');
+
 
 Route::get('/admin/pagos','AdminController@pagos')->name('admin_pagos');
 

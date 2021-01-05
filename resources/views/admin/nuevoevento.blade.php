@@ -38,10 +38,19 @@
                                 <ul id="paquetes_list" class="d-none">
                                     @if(isset($paquetes))
                                         @foreach($paquetes as $paquete)
-                                            <li data-value="{{$paquete->id}}">{{$paquete->nombre}}</li>
+                                            <li data-precio="{{$paquete->precio}}" data-divisa="{{$paquete->divisa}}" data-value="{{$paquete->id}}">{{$paquete->nombre}}</li>
                                         @endforeach
                                     @endif
                                 </ul>
+                                <ul id="divisas_list" class="d-none">
+                                    @if(isset($divisas))
+                                        @foreach($divisas as $divisa)
+                                            <li data-value="{{$divisa->clave}}">{{$divisa->descripcion}}</li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+
+
 
                                 <div class="row" id="container_secciones">
 

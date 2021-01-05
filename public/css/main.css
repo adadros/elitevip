@@ -26,8 +26,6 @@ div.app-bar ul.app-bar-menu li a{
   font-weight: bold;
 }
 
-
-
 #body-content {
   background-color: #111111;
   color: rgba(255, 255, 255, 0.5);
@@ -75,13 +73,11 @@ div.app-bar ul.app-bar-menu li a{
 }
 
 
-
 #registro-form .dropdown-toggle{
   background: rgba(0,0,0,.3) !important;
   border:thin solid rgba(174,160,115,.4) !important;
   color:#AEA073 !important;
 }
-
 
 /*
 #registro-form .default-icon-cross{
@@ -144,4 +140,24 @@ ul.ismultiple{
   padding:5px;
   font-size: .9rem;
   color:rgba(255,0,0,.8);
+}
+
+/**eventos list*/
+.evento-list > p{
+  display:block;
+  text-align:justify;
+  margin-bottom:15px;
+  font-size:16px;
+}
+
+.card-header-evento div.small{
+  font-size:12px !important;
+  line-height:1.1em;
+}
+
+.titulo-listados{
+  margin-bottom:10px;
+  border-bottom:1px solid rgba(174,160,115,.4);
+  font-size:1.8rem;
+
 }
