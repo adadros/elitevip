@@ -64,6 +64,12 @@ Route::get('/admin/opciones','AdminController@opciones')->name('admin_opciones')
 Route::post('/admin/evtupload','AjaxEventController@uploadPortada')->name('portada_upload');
 Route::post('/admin/deleteimage','AjaxEventController@deleteImage')->name('delete_image');
 
+/**modo perfil de usuario*/
+
+
+Route::get('/evento/{id}/detalle','EventoController@detalle')->name('evento_detalle');
+
+
 
 Route::get('/testcard','PaymentsController@view')->name('payments');
 

@@ -20,10 +20,10 @@
 
 
     <a href="#" class="brand no-hover">
-        <button class="app-bar-item border bg-darkTaupe c-pointer d-none-md mr-5" id="sidebar-toggle-3">
+        <button class="app-bar-item border bg-darkTaupe c-pointer d-none-md mr-2" id="sidebar-toggle-3">
             <span class="mif-user mif-2x  fg-lightTaupe"></span>
         </button>
-        <img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}">
+        <div class="w-80"><img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}"></div>
 
     </a>
 
@@ -57,8 +57,10 @@
             <div class="avatar bg-black">
                 <img class="img-responsive" src="{{asset('public/images/elitevip.svg')}}">
             </div>
+
+
             <span class="title bg-black fg-white px-2">PERFIL DE USUARIO</span>
-            <span class="subtitle bg-black fg-white px-2">@if(isset($profile)) {{     $profile['nombre'].' '.$profile['apellido']  }}  @else     @endif</span>
+            <span class="subtitle bg-black fg-white px-2">@if(session('profile')) {{ session('profile')['nombre'] }} {{  session('profile')['apellido']  }}  @else     @endif</span>
 
         </div>
         <ul class="sidebar-menu fg-taupe">

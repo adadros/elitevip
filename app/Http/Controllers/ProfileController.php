@@ -38,29 +38,14 @@ class ProfileController extends Controller
 
     public function view(Evento $evento){
         if(Auth::user()->isActivo(Auth::id())) {
+            session(['profile'=>$this->getProfile()]);
             if (Auth::user()->hasAnyRole(Auth::id(), 'Admin')) {
                 return redirect('/admin');
             } else {
 
-                $data['profile'] = $this->getProfile();
+
                 $eventos = $evento->all();
-
-                if(isset($eventos)){
-                    foreach ($eventos as $ev){
-                        $fecha_arr = [];
-                        $fechas = Eventofecha::where(['idevento'=>$ev->id])->get();
-                        if(isset($fechas)){
-                            foreach ($fechas as $fecha){
-                                $fecha_arr[] = $this->obtenerFechaEnLetra($fecha->fecha);
-                            }
-                        }
-                        $ev->fechas = $fecha_arr;
-
-                    }
-                }
                 $data['eventos'] = $eventos;
-
-
                 return view('usuario/perfil',$data);
             }
         }else{
@@ -71,19 +56,6 @@ class ProfileController extends Controller
     }
 
 
-    public function obtenerFechaEnLetra($fecha){
-        $dia= $this->conocerDiaSemanaFecha($fecha);
-        $num = date("j", strtotime($fecha));
-        $anno = date("Y", strtotime($fecha));
-        $mes = array('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
-        $mes = $mes[(date('m', strtotime($fecha))*1)-1];
-        return $dia.', '.$num.' de '.$mes.' del '.$anno;
-    }
 
-    public function conocerDiaSemanaFecha($fecha) {
-        $dias = array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-        $dia = $dias[date('w', strtotime($fecha))];
-        return $dia;
-    }
 
 }
