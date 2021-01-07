@@ -37,12 +37,9 @@
         },
         "classmap": [
             "database/seeds",
-            "database/factories",
-            "app/Libraries/bin/conekta-php-master/lib/Conekta"
-        ],
-        "files": [
-            "app/helpers.php"
+            "database/factories"
         ]
+
     },
     "autoload-dev": {
         "psr-4": {
