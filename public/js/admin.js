@@ -33,6 +33,7 @@ Metro.utils.addLocale({
 });
 var jq = jQuery;
 var host = 'https://eliteexperiencevip.com';
+var activity = null;
 //var host = 'http://localhost:8000';
 moment.locale('es');
 
@@ -96,7 +97,7 @@ function getMensajeDialogIF(titulo,mensaje,funcion_ok,funcion_cancel){
 }
 
 
-function doAjax(url,params,success){
+function doAjax(url,params,funcion){
     iniciaLoading();
     jq.ajaxSetup({
         headers: {
@@ -112,12 +113,10 @@ function doAjax(url,params,success){
         contentType:'application/json; charset=utf-8',
         cache:false,
         processData:false,
-        success:function(data){
-            try{
-                closeLoading();
-                success(data);
-            }catch(err){
-                console.log(err);
+        done:function(data){
+            closeLoading();
+            if (funcion && typeof(funcion) == "function") {
+                funcion(data);
             }
         },
         error:function(error){
@@ -900,9 +899,6 @@ function aprobarUsuario(_this){
 function updateUsuario(){
 
     
-
-    
-    
 }
 
 function saveUsuario(){
@@ -939,10 +935,16 @@ function deleteUsuario(_this){
 
 
 function iniciaLoading(){
-    console.log('inicio loading');
+    activity = Metro.activity.open({
+        type: 'cycle',
+        //style:'dark',
+        overlayColor: '#AEA073',
+        text: '<div class=\'mt-2 text-small\'>Espere por favor...</div>',
+        overlayAlpha: .5
+    });
 }
 
 
 function closeLoading(){
-    console.log('close loading data');
+    Metro.activity.close(activity);
 }

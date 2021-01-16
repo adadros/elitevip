@@ -61,9 +61,8 @@
                                 @endforeach
                             </select>
                             <small class="error">{{$errors->first('paises')}}</small>
+                        </div>
 
-
-                        </ul>
                         <div class="form-group">
                             <label class="left">¿Cuáles son tus hoteles favoritos?</label>
                             <textarea id="hoteles" name="hoteles" type="text" class="metro-input">{{old('hoteles')}}</textarea>
@@ -109,11 +108,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="d-flex flex-justify-center">
-                    <button class="mt-15 pl-10 pr-10 button shadowed bg-taupe fg-white large rounded bg-lightTaupe-hover" onclick="submit()">Registrar</button>
-            </div>
 
+                </div>
+                <div class="d-flex flex-justify-center">
+                        <button class="mt-15 pl-10 pr-10 button shadowed bg-taupe fg-white large rounded bg-lightTaupe-hover" onclick="submit()">Registrar</button>
+                </div>
+            </div>
 
 
             <!--<a role="button" type="submit" class="button shadowed bg-taupe action-button large" href="javascript:;"  >Registrar</a>-->

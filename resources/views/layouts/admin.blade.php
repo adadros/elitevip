@@ -10,8 +10,9 @@
     <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Metro 4 -->
-    <link rel="stylesheet" href="{{asset("public/css/metro-4.4.3.min.css")}}">
-    <link rel="stylesheet" href="{{ asset("public/css/admin.css")}}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset("css/metro-4.4.3.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("css/admin.css")}}" />
 
 </head>
 <body class="is-preload" id="body-content">
@@ -33,20 +34,21 @@
 
 
 
-    <div class="sidebar-header" data-image="{{asset('public/images/dj_banner.jpg')}}">
+    <div class="sidebar-header" data-image="{{asset('images/dj_banner.jpg')}}">
         <a href="/" class="fg-white sub-action d-none-md"
            onclick="Metro.sidebar.close('#sidebar'); return false;">
             <span class="mif-arrow-left mif-2x"></span>
         </a>
         <div class="avatar bg-black">
-            <img class="img-responsive" src="{{asset('public/images/elitevip.svg')}}">
+            <img class="img-responsive" src="{{asset('images/elitevip.svg')}}">
         </div>
         <span class="title bg-black fg-white px-2">PERFIL DE ADMINISTRADOR</span>
-        <span class="subtitle bg-black fg-white px-2">{{     $profile['nombre'].' '.$profile['apellido'] }} </span>
+        <span class="subtitle bg-black fg-white px-2">@if(session('profile')) {{ session('profile')['nombre'] }} {{  session('profile')['apellido']  }}  @else     @endif </span>
 
     </div>
     <ul class="sidebar-menu">
         <li class="group-title">Principal</li>
+        <li class="{{ (request()->is('admin/categorias')) ? 'active bg-taupe' : '' }}"><a class="fg-black-hover" href="{{route('admin_categorias')}}"><i class="fas fa-shapes icon"></i> Categorías</a></li>
         <li class="{{ (request()->is('admin/secciones')) ? 'active bg-taupe' : '' }}"><a class="fg-black-hover" href="{{route('admin_secciones')}}"><span class="mif-new-tab icon"></span>Secciones</a></li>
         <li class="{{ (request()->is('admin/paquetes')) ? 'active bg-taupe' : '' }}"><a class="fg-black-hover" href="{{route('admin_paquetes')}}"><span class="mif-tags icon"></span>Paquetes</a></li>
         <li class="{{ (request()->is('admin/eventos')) ? 'active bg-taupe' : '' }}"><a class="fg-black-hover" href="{{route('admin_eventos')}}"><span class="mif-event-available icon"></span>Eventos</a></li>
@@ -89,9 +91,9 @@
 </div>
 <!-- Scripts -->
 <!-- Metro 4 -->
-<script src="{{asset("public/js/metro-4.4.3.min.js")}}"></script>
-<script src="{{ asset("public/js/jquery.min.js") }}"></script>
-<script src="{{ asset("public/js/moment.js") }}"></script>
+<script src="{{asset("js/metro-4.4.3.min.js")}}"></script>
+<script src="{{ asset("js/jquery.min.js") }}"></script>
+<script src="{{ asset("js/moment.js") }}"></script>
 <script src="https://cdn.tiny.cloud/1/pj8ectsoe9ddblad8jgdntgc9pq2ch5kfs2qnetd3bsyczrp/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
@@ -107,7 +109,7 @@
 
 </script>
 
-<script src="{{ asset("public/js/admin.js") }}"></script>
+<script src="{{ asset("js/admin.js") }}"></script>
 
 </body>
 </html>

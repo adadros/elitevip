@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset("public/css/metro-4.4.3.min.css")}}">
     <link rel="stylesheet" href="{{ asset("public/css/main.css")}}" />
 
@@ -18,13 +20,11 @@
 <!-- Header -->
 <div data-role="appbar" data-expand-point="md" class="bg-black fg-taupe">
 
-
     <a href="#" class="brand no-hover">
         <button class="app-bar-item border bg-darkTaupe c-pointer d-none-md mr-2" id="sidebar-toggle-3">
             <span class="mif-user mif-2x  fg-lightTaupe"></span>
         </button>
         <div class="w-80"><img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}"></div>
-
     </a>
 
 
@@ -32,7 +32,7 @@
         <li><a class="fg-lightTaupe-hover" href="{{route('inicio')}}">Inicio</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('proveedores')}}">Proveedores</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('colaboradores')}}">Colaboradores</a></li>
-        <li><a class="fg-lightTaupe-hover" href="{{route('bolsa')}}">Bolsa de trabajo</a></li>
+        <li><a class="fg-lightTaupe-hover" href="{{route('bolsatrabajo')}}">Bolsa de trabajo</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('eventos')}}">Eventos</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('contacto')}}">Contacto</a></li>
     </ul>
@@ -59,7 +59,7 @@
             </div>
 
 
-            <span class="title bg-black fg-white px-2">PERFIL DE USUARIO</span>
+            <span class="title bg-black fg-white px-2">PERFIL DE USUARIOS</span>
             <span class="subtitle bg-black fg-white px-2">@if(session('profile')) {{ session('profile')['nombre'] }} {{  session('profile')['apellido']  }}  @else     @endif</span>
 
         </div>

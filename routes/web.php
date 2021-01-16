@@ -10,15 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', 'ContentController@home')->name('inicio');
-Route::get('/contacto', 'ContentController@contacto')->name('contacto');
-Route::get('/colaboradores', 'ContentController@colaboradores')->name('colaboradores');
-Route::get('/proveedores', 'ContentController@proveedores')->name('proveedores');
-Route::get('/bolsa', 'ContentController@bolsa')->name('bolsa');
+//contacto web page
+Route::get('/contacto', 'ContactoController@nuevo')->name('contacto');
+Route::post('/contacto/send', 'ContactoController@send')->name('contacto_send');
+//colabooradores
+Route::get('/colaboradores', 'ColaboradoresController@nuevo')->name('colaboradores');
+Route::post('/colaboradores/send', 'ColaboradoresController@send')->name('colaboradores_send');
+//bolsatrabajo
+Route::get('/bolsatrabajo', 'BolsaController@nuevo')->name('bolsatrabajo');
+Route::post('/bolsatrabajo/send', 'BolsaController@send')->name('bolsatrabajo_send');
+//proveedores
+Route::get('/proveedores', 'ProveedorController@nuevo')->name('proveedores');
+Route::post('/proveedores/send', 'ProveedorController@send')->name('proveedores_send');
+
 Route::get('/registro', 'RegisterController@nuevo')->name('registro');
 Route::get('/inicia-sesion', 'LoginController@inicio')->name('loguear');
 Route::post('/registro/new', 'RegisterController@create_new')->name('nuevo_registro');
+
 Route::get('/perfil', 'ProfileController@view')->name('perfil');
 Route::get('/eventos', 'EventoController@view')->name('eventos');
 Route::get('/admin','AdminController@panel')->name('admin');
@@ -44,6 +53,10 @@ Route::get('/admin/seccion/{id}/editar','AdminController@editSeccion')->name('ad
 Route::post('/admin/seccion/guardar','AjaxSeccionController@guardar')->name('guardar_seccion');
 Route::post('/admin/seccion/actualizar','AjaxSeccionController@actualizar')->name('actualizar_seccion');
 Route::post('/admin/seccion/eliminar','AjaxSeccionController@eliminar')->name('eliminar_seccion');
+/**categorias*/
+Route::get('/admin/categorias','AdminController@categorias')->name('admin_categorias');
+
+
 
 /**eventos*/
 Route::get('/admin/eventos','AdminController@eventos')->name('admin_eventos');
@@ -68,10 +81,19 @@ Route::post('/admin/deleteimage','AjaxEventController@deleteImage')->name('delet
 
 
 Route::get('/evento/{id}/detalle','EventoController@detalle')->name('evento_detalle');
+Route::get('/evento/{id}/apartar','EventoController@apartar')->name('evento_apartar');
+Route::post('/evento/secciones','EventoController@getseccion')->name('evento_getseccion');
+Route::post('/evento/paquetes','EventoController@getpaquetes')->name('evento_getpaquetes');
+Route::post('/evento/available','EventoController@getavailable')->name('evento_getavailable');
+Route::post('/evento/payform','EventoController@payform')->name('evento_payform');
+
 
 
 
 Route::get('/testcard','PaymentsController@view')->name('payments');
+Route::get('/inicio',function(){
+    return view('content/home');
+})->name('inicio_alternativo');
 
 //Route::get('/registro/nuevo', 'RegisterController@nuevo_registro')->name('nuevo_registro');
 

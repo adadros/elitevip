@@ -9,6 +9,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset("public/css/metro-4.4.3.min.css")}}">
     <link rel="stylesheet" href="{{ asset("public/css/main.css")}}" />
 
@@ -17,7 +18,7 @@
 
 <!-- Header -->
 <div data-role="appbar" data-expand-point="md" class="bg-black fg-taupe">
-    <a href="#" class="brand no-hover">
+    <a href="{{ url('/') }}" class="brand no-hover">
         <img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}">
     </a>
 
@@ -25,7 +26,7 @@
         <li><a class="fg-lightTaupe-hover" href="{{route('inicio')}}">Inicio</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('proveedores')}}">Proveedores</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('colaboradores')}}">Colaboradores</a></li>
-        <li><a class="fg-lightTaupe-hover" href="{{route('bolsa')}}">Bolsa de trabajo</a></li>
+        <li><a class="fg-lightTaupe-hover" href="{{route('bolsatrabajo')}}">Bolsa de trabajo</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('contacto')}}">Contacto</a></li>
         <li><a class="fg-lightTaupe-hover" href="{{route('registro')}}">Registro</a></li>
     </ul>

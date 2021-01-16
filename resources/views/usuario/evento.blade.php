@@ -10,12 +10,16 @@
         @endif
 
         @if($evento)
-            <div class="row op-darkTaupe-low w-100 p-2">
+            <div class="row op-darkTaupe-hi w-100 p-2">
                 <div class="cell-md-8">
-                    <?php dd($fechas); ?>
+                    @if(isset($fechas))
+                        @foreach($fechas as $fecha)
+                            <div><span class="mif-calendar mr-1"></span> {{$fecha}}</div>
+                        @endforeach
+                    @endif
                 </div>
                 <div class="cell-md-4 text-right">
-                    <a role="button" class="button success large rounded">Comprar boleto</a>
+                    <a role="button" href="{{route('evento_apartar',['id'=>$evento->id])}}" class="button success large rounded">Comprar boleto <span class="mif-tags"></span></a>
                 </div>
             </div>
             <div class="row">
@@ -25,19 +29,8 @@
                         <?php print $evento->descripcion; ?>
                     </div>
                 </div>
-
-
-
             </div>
-
-
         @endif
-
-
-            {{session('profile')['apellido']}}
-
-
-
 
 
     </div>
