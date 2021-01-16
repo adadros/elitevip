@@ -81,7 +81,7 @@
                     Sitio en construcción!..
                 </div>
                 <div>
-                    <img class="responsive-logo" src="{{ asset("public/images/elitevip.jpg")}}" alt="logo">
+                    <img class="responsive-logo" src="{{ asset("images/elitevip.jpg")}}" alt="logo">
                 </div>
 
                 

@@ -91,6 +91,7 @@ Route::post('/evento/payform','EventoController@payform')->name('evento_payform'
 
 
 Route::get('/testcard','PaymentsController@view')->name('payments');
+
 Route::get('/inicio',function(){
     return view('content/home');
 })->name('inicio_alternativo');

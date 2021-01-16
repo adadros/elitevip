@@ -56,7 +56,7 @@ text-align: center; text-decoration: none; -webkit-text-size-adjust: none;',
 
                 <tr>
                     <td align="center" bgcolor="#110F0A" style="padding: 40px 0 30px 0;">
-                        <img src="{{asset('public/images/logo_elite_mail.gif')}}" alt="eliteexperiencevip" width="200" height="150" style="display: block;" />
+                        <img src="{{asset('images/logo_elite_mail.gif')}}" alt="eliteexperiencevip" width="200" height="150" style="display: block;" />
                     </td>
                 </tr>
                 <tr>

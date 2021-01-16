@@ -51,6 +51,27 @@ div.app-bar ul.app-bar-menu li a{
   color:#AEA073 !important;
 }
 
+#fechas_select input,#fechas_select .input, #fechas_select select, #fechas_select textarea{
+  background: rgba(0,0,0,.9);
+  border:thin solid rgba(145,145,145,.3) !important;
+  font-size:1rem !important;
+  color:#AEA073 !important;
+}
+
+#secciones input,#secciones .input, #secciones select, #secciones textarea{
+  background: rgba(0,0,0,.9);
+  border:thin solid rgba(145,145,145,.3) !important;
+  font-size:1rem !important;
+  color:#AEA073 !important;
+}
+
+#paquetes input,#paquetes .input, #paquetes select, #paquetes textarea{
+  background: rgba(0,0,0,.9);
+  border:thin solid rgba(145,145,145,.3) !important;
+  font-size:1rem !important;
+  color:#AEA073 !important;
+}
+
 #nombre,#apellido {
   text-transform: uppercase;
 }
@@ -62,18 +83,18 @@ div.app-bar ul.app-bar-menu li a{
 }
 
 
-#registro-form .drop-container{
+#registro-form .drop-container, #fechas_select .drop-container, #secciones .drop-container, #paquetes .drop-container{
   background: rgba(0,0,0,.9) !important;
   border:2px solid rgba(174,160,115,.6) !important;
 }
 
 
-#registro-form .select{
+#registro-form .select, #fechas_select .select, #secciones .select, #paquetes .select{
   border:thin solid rgba(145,145,145,.5) !important;
 }
 
 
-#registro-form .dropdown-toggle{
+#registro-form .dropdown-toggle, #fechas_select .dropdown-toggle, #secciones .dropdown-toggle, #paquetes .dropdown-toggle{
   background: rgba(0,0,0,.3) !important;
   border:thin solid rgba(174,160,115,.4) !important;
   color:#AEA073 !important;
@@ -85,11 +106,11 @@ div.app-bar ul.app-bar-menu li a{
 }
 */
 
-#registro-form .dropdown-toggle:hover{
+#registro-form .dropdown-toggle:hover, #fechas_select .dropdown-toggle:hover,  #secciones .dropdown-toggle:hover, #paquetes .dropdown-toggle:hover{
   border:thin solid rgba(174,160,115,.7) !important;
 }
 
-#registro-form .dropdown-toggle::before{
+#registro-form .dropdown-toggle::before, #fechas_select .dropdown-toggle::before, #secciones .dropdown-toggle::before, #paquetes .dropdown-toggle::before{
   border-color:#AEA073 !important;
 }
 
@@ -159,5 +180,46 @@ ul.ismultiple{
   margin-bottom:10px;
   border-bottom:1px solid rgba(174,160,115,.4);
   font-size:1.8rem;
+}
 
+.container-selects{
+  max-width:300px;
+  min-width:100px;
+}
+
+.smit-available[data-disabled='true'], .smit-available[data-disabled='true']:hover{
+  background:dimgray !important;
+  color:slategray !important;
+  cursor:not-allowed;
+}
+.list-ticket span{
+  font-size:22px !important;
+}
+.content-ticket, .footer-ticket{
+  font-size:18px !important;
+  font-weight:bold;
+}
+
+#ctn-cantidad input{
+  background:black;
+  color:white;
+  font-size:1.4em;
+
+}
+#ctn-cantidad .spinner{
+  border:thin solid rgba(174,160,115,.5) !important;
+  width:50% !important;
+  margin:auto;
+}
+
+#ctn-cantidad .spinner-button-plus, #ctn-cantidad .spinner-button-minus{
+  background:#AEA073;
+
+}
+
+#for_persona{
+  font-size:1.3em;
+}
+#available-container{
+  font-size:1.2rem;
 }

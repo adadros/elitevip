@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div>
-        <img class="img-responsive" src="{{asset('/public/images/elitevip.jpg')}}" >
+        <img class="img-responsive" src="{{asset('images/elitevip.jpg')}}" >
     </div>
     <div class="cell-md-6">
         <h3>Hola {{$detalle['nombre']}}, bienvenido a Elite Experience Vip</h3>

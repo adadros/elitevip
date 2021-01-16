@@ -10,8 +10,8 @@
     <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Metro 4 -->
-    <link rel="stylesheet" href="{{asset("public/css/metro-4.4.3.min.css")}}">
-    <link rel="stylesheet" href="{{ asset("public/css/admin.css")}}" />
+    <link rel="stylesheet" href="{{asset("css/metro-4.4.3.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("css/admin.css")}}" />
 
 </head>
 <body class="is-preload" id="body-content">
@@ -23,7 +23,7 @@
 
 <!-- Scripts -->
 <!-- Metro 4 -->
-<script src="{{asset("public/js/metro-4.4.3.min.js")}}"></script>
+<script src="{{asset("js/metro-4.4.3.min.js")}}"></script>
 
 </body>
 </html>
