@@ -7,7 +7,7 @@
                 <div class="cell-lg-4 cell-md-8 cell-sm-8 cell-fs-12">
                     <div class="evento-list px-2">
                         <div class="img-container rounded">
-                            <img src="{{asset('public/uploads/'.$evento->portada)}}">
+                            <img src="{{asset('uploads/'.$evento->portada)}}">
                             <div class="image-overlay op-black-low">
                                 <div class="pos-absolute pos-center z-5">
                                         <div class="h6">{{$evento->titulo}}</div>

@@ -55,11 +55,11 @@
                 <div class="card op-white-hi border-dashed bd-lightTaupe">
                     <div class="card-header bg-darkTaupe fg-white p-0">
                         <div class="p-2">{{$evento->titulo}} </div>
-                        <div class="row list-ticket bg-black fg-lightTaupe pos-relative mx-0" style="background-image:url({{asset('public/images/cintilla.gif')}}); height:30px;">
+                        <div class="row list-ticket bg-black fg-lightTaupe pos-relative mx-0" style="background-image:url({{asset('images/cintilla.gif')}}); height:30px;">
 
                         </div>
                     </div>
-                    <div class="card-content content-ticket px-1" style="background-image:url({{asset('public/images/bgbodycard200.gif')}})">
+                    <div class="card-content content-ticket px-1" style="background-image:url({{asset('images/bgbodycard200.gif')}})">
 
                         <div class="row fg-black p-2">
 

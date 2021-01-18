@@ -1,4 +1,4 @@
-var host = 'https://eliteexperiencevip.com';
+var host = 'https://eliteexperience.vip';
 var jq = jQuery;
 var mtr = $;
 var activity = null;

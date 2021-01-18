@@ -79,7 +79,7 @@ class ContactoController extends Controller
 
                 $detalle = [
                     'to' => Config::get('constants.EMAIL_CONTACTO'),
-                    'from' => 'adminweb@eliteexperiencevip.com',
+                    'from' => 'contacto@eliteexperience.vip',
                     'subject' => "Contacto de ".$data['nombre'],
                     'title' => "Se ha mandado un correo desde el formulario de contacto",
                     "nombre"  => $data['nombre'],

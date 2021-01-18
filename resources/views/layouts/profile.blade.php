@@ -24,7 +24,7 @@
         <button class="app-bar-item border bg-darkTaupe c-pointer d-none-md mr-2" id="sidebar-toggle-3">
             <span class="mif-user mif-2x  fg-lightTaupe"></span>
         </button>
-        <div class="w-80"><img class="img-responsive" src="{{asset("public/images/eliteexptext.svg")}}"></div>
+        <div class="w-80"><img class="img-responsive" src="{{asset("images/eliteexptext.svg")}}"></div>
     </a>
 
 
@@ -49,13 +49,13 @@
            data-static="md"
     >
 
-        <div class="sidebar-header" data-image="{{asset('public/images/dj_banner.jpg')}}">
+        <div class="sidebar-header" data-image="{{asset('images/dj_banner.jpg')}}">
             <a href="/" class="fg-white sub-action d-none-md"
                onclick="Metro.sidebar.close('#sidebar'); return false;">
                 <span class="mif-arrow-left mif-2x"></span>
             </a>
             <div class="avatar bg-black">
-                <img class="img-responsive" src="{{asset('public/images/elitevip.svg')}}">
+                <img class="img-responsive" src="{{asset('images/elitevip.svg')}}">
             </div>
 
 

@@ -32,7 +32,7 @@ Metro.utils.addLocale({
     }
 });
 var jq = jQuery;
-var host = 'https://eliteexperiencevip.com';
+var host = 'https://eliteexperience.vip';
 var activity = null;
 //var host = 'http://localhost:8000';
 moment.locale('es');
