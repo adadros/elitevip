@@ -113,7 +113,7 @@ function doAjax(url,params,funcion){
         contentType:'application/json; charset=utf-8',
         cache:false,
         processData:false,
-        done:function(data){
+        success:function(data){
             closeLoading();
             if (funcion && typeof(funcion) == "function") {
                 funcion(data);

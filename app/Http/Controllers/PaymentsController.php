@@ -7,8 +7,8 @@
  */
 namespace App\Http\Controllers;
 
-use Conekta\Conekta;
 use Illuminate\Http\Request;
+use App\Conekta;
 
 class PaymentsController extends Controller
 {
@@ -17,14 +17,68 @@ class PaymentsController extends Controller
         $this->middleware('auth');
     }
 
-    public function view(){
+    public function procesa_pago(Request $request){
+        if($request->ajax()){
+
+            return response()->json([
+                'paquetes' => $request->all(),
+                'getdata'=>true
+            ]);
+
+            /*
+            $conekta_payment = new Conekta\ConektaPayment();
+
+            $orden = [
+                'amount'      => 100 * 100,
+                'currency'    => 'mxn',
+                'description' => 'Boletos de Cine CineChido',
+                'customer_info'     => [
+                    'name'  => 'Daniel Salcedo',
+                    'phone' => '',
+                    'email' => 'laboratorio@backapp.com.mx'
+                ],
+                'line_items' => [
+                    [
+                        'name'        => 'Pantalla',
+                        'description' => 'Pantalla 4k para jugar juegos jugables chidos perrones :v',
+                        'unit_price'  => 100 * 100,
+                        'quantity'    => 1,
+                        'sku'         => 'PANTALLA4k0001'
+                    ]
+                ]
+            ];
+            $tokenTarjeta = 'tok_test_visa_4242';
+
+            */
+            
+            
 
 
-        $version = \Conekta\Conekta::$pluginVersion;
-        //\Conekta\Conekta::setApiKey
-        $data['version'] = $version;
+            //$conekta_payment->conTarjeta();
 
-        return view('usuario/pago',$data);
+            /*
+            $id = $request->input('id');
+            $seccion = $request->input('seccion');
+
+            $paquetes = DB::table('view_tickets')->select(['idpaquete','paquete'])->where([
+                ['idevento', '=', $id,'and' ],['idseccion','=',$seccion]
+            ])->groupBy(['idpaquete','paquete'])->get();
+
+            */
+
+
+
+            /*
+
+            return response()->json([
+                'paquetes' => $paquetes,
+                'getdata'=>true
+            ]);*/
+
+
+        }
     }
+
+
 
 }

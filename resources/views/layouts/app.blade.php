@@ -66,7 +66,7 @@
 <!-- Metro 4 -->
 <script src="{{asset("js/metro-4.4.3.min.js")}}"></script>
 <script src="{{ asset("js/jquery.min.js") }}"></script>
-<script src="{{ asset("js/main.js") }}"></script>
+<script src="{{ asset("js/public.js") }}"></script>
 
 </body>
 </html>

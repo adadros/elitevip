@@ -79,7 +79,6 @@ Route::post('/admin/deleteimage','AjaxEventController@deleteImage')->name('delet
 
 /**modo perfil de usuario*/
 
-
 Route::get('/evento/{id}/detalle','EventoController@detalle')->name('evento_detalle');
 Route::get('/evento/{id}/apartar','EventoController@apartar')->name('evento_apartar');
 Route::post('/evento/secciones','EventoController@getseccion')->name('evento_getseccion');
@@ -87,18 +86,15 @@ Route::post('/evento/paquetes','EventoController@getpaquetes')->name('evento_get
 Route::post('/evento/available','EventoController@getavailable')->name('evento_getavailable');
 Route::post('/evento/payform','EventoController@payform')->name('evento_payform');
 
+/**modo pago*/
+Route::post('/evento/pagar','PaymentsController@procesa_pago')->name('pagar');
+/**modo pago*/
 
 
-
-Route::get('/testcard','PaymentsController@view')->name('payments');
 Route::get('/inicio',function(){
     return view('content/home');
-
 })->name('inicio_alternativo');
-
 //Route::get('/registro/nuevo', 'RegisterController@nuevo_registro')->name('nuevo_registro');
-
 Auth::routes();
-
 
 //Route::get('/home', 'HomeController@index')->name('inicio');

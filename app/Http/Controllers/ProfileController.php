@@ -23,7 +23,7 @@ class ProfileController extends Controller
     public function getProfile(){
 
         $profile = DB::table('users as u')
-            ->select(['u.id','u.email','perfil.nombre','perfil.apellido'])
+            ->select(['u.id','u.email','perfil.nombre','perfil.apellido','perfil.telefono'])
             ->join('perfil', 'perfil.uid', '=', 'u.id')
             ->whereRaw('u.id = ?',[Auth::id()])
             ->get()->first();

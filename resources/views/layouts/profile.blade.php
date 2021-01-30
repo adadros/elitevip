@@ -123,8 +123,11 @@
 
 <!-- Scripts -->
 <!-- Metro 4 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="https://cdn.conekta.io/js/latest/conekta.js"></script>
 <script src="{{asset("js/metro-4.4.3.min.js")}}"></script>
 <script src="{{ asset("js/jquery.min.js") }}"></script>
+<script src="{{ asset("js/anime.min.js") }}"></script>
 <script src="{{ asset("js/main.js") }}"></script>
 
 </body>

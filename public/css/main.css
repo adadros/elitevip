@@ -12,6 +12,56 @@ body{
   line-height: 1.65;
 }
 
+/*font-sizes**/
+.f-size-10{  font-size: 10px; }
+.f-size-11{  font-size: 11px; }
+.f-size-12{  font-size: 12px; }
+.f-size-13{  font-size: 13px; }
+.f-size-14{  font-size: 14px; }
+.f-size-15{  font-size: 15px; }
+.f-size-16{  font-size: 16px; }
+.f-size-17{  font-size: 17px; }
+.f-size-18{  font-size: 18px; }
+.f-size-19{  font-size: 19px; }
+.f-size-20{  font-size: 20px; }
+.f-size-21{  font-size: 21px; }
+.f-size-22{  font-size: 22px; }
+.f-size-23{  font-size: 23px; }
+.f-size-24{  font-size: 24px; }
+
+/**top*/
+.t-5{  top:-5px !important; }
+.t-10{  top:-10px !important; }
+.t-15{  top:-15px !important; }
+.t-20{  top:-20px !important; }
+.t-25{  top:-25px !important; }
+.t-30{  top:-30px !important; }
+.t-35{  top:-35px !important; }
+.t-40{  top:-40px !important; }
+.t-45{  top:-45px !important; }
+.t-50{  top:-50px !important; }
+.t-55{  top:-55px !important; }
+.t-60{  top:-60px !important; }
+.t-65{  top:-65px !important; }
+.t-70{  top:-70px !important; }
+
+.t5{ top:5px !important; }
+.t10{ top:10px !important; }
+.t15{ top:15px !important; }
+.t20{ top:20px !important; }
+.t25{ top:25px !important; }
+.t30{ top:30px !important; }
+.t35{ top:35px !important; }
+.t40{ top:40px !important; }
+.t45{ top:45px !important; }
+.t50{ top:50px !important; }
+.t55{ top:55px !important; }
+.t60{ top:60px !important; }
+.t65{ top:65px !important; }
+.t70{ top:70px !important; }
+
+/**top*/
+
 .img-responsive{
   width:80%;
   height:auto;
@@ -19,6 +69,10 @@ body{
 
 .line{
   background-color: #937D3F !important;
+}
+
+.u-hline{
+  border-top: 2px solid #eee;
 }
 
 div.app-bar ul.app-bar-menu li a{
@@ -44,6 +98,8 @@ div.app-bar ul.app-bar-menu li a{
   padding:10px;
   border-radius:2px;
 }
+
+
 #registro-form input,#registro-form .input, #registro-form select, #registro-form textarea{
   background: rgba(0,0,0,.9);
   border:thin solid rgba(145,145,145,.3) !important;
@@ -77,9 +133,29 @@ div.app-bar ul.app-bar-menu li a{
 }
 
 
-#registro-form .button-group{
+#registro-form .button-group {
   background:#AEA073 !important;
+}
 
+.user-tickets .button-group{
+  background: rgba(0,0,0,.9);
+}
+.user-tickets input{
+  background: rgba(0,0,0,.9);
+  border:thin solid rgba(145,145,145,0) !important;
+  font-size:1rem !important;
+  color:#AEA073 !important;
+  text-transform: uppercase;
+}
+.user-tickets .metro-input{
+  border:thin solid rgba(145,145,145,.2);
+}
+.ticket-folio label{
+  font-size:.9rem;
+  color:white;
+}
+.ticket-folio input{
+  text-transform: uppercase;
 }
 
 
@@ -140,7 +216,7 @@ div.app-bar ul.app-bar-menu li a{
   filter: invert(90%) sepia(55%) saturate(500%) hue-rotate(346deg) brightness(124%) contrast(97%);
 }
 
-#login-form .default-icon-cross {
+#login-form .default-icon-cross, .user-tickets .default-icon-cross {
   background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%0A%3Cpath%20fill%3D%22%23000%22%20d%3D%22M31.708%2025.708c-0-0-0-0-0-0l-9.708-9.708%209.708-9.708c0-0%200-0%200-0%200.105-0.105%200.18-0.227%200.229-0.357%200.133-0.356%200.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13%200.048-0.252%200.124-0.357%200.228%200%200-0%200-0%200l-9.708%209.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057%200.229l-4.586%204.586c-0.286%200.286-0.361%200.702-0.229%201.057%200.049%200.13%200.124%200.252%200.229%200.357%200%200%200%200%200%200l9.708%209.708-9.708%209.708c-0%200-0%200-0%200-0.104%200.105-0.18%200.227-0.229%200.357-0.133%200.355-0.057%200.771%200.229%201.057l4.586%204.586c0.286%200.286%200.702%200.361%201.057%200.229%200.13-0.049%200.252-0.124%200.357-0.229%200-0%200-0%200-0l9.708-9.708%209.708%209.708c0%200%200%200%200%200%200.105%200.105%200.227%200.18%200.357%200.229%200.356%200.133%200.771%200.057%201.057-0.229l4.586-4.586c0.286-0.286%200.362-0.702%200.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z%22%3E%3C%2Fpath%3E%0A%3C%2Fsvg%3E%0A);
   filter: invert(90%) sepia(55%) saturate(500%) hue-rotate(346deg) brightness(124%) contrast(97%);
 }
@@ -200,6 +276,21 @@ ul.ismultiple{
   font-weight:bold;
 }
 
+.footer-ticket{
+  width:100%;
+  text-align: center;
+}
+.footer-ticket > div{
+  width:80%;
+  margin:auto;
+  text-align: center;
+}
+.collapse{
+  visibility: collapse;
+}
+
+
+
 #ctn-cantidad input{
   background:black;
   color:white;
@@ -223,3 +314,10 @@ ul.ismultiple{
 #available-container{
   font-size:1.2rem;
 }
+
+/**container para tabla de agregar paquetes*/
+.container-paquete{
+  width:100%;
+  max-width: 700px;
+}
+/**container para tabla de agregar paquetes*/
