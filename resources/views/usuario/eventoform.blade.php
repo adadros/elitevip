@@ -75,7 +75,7 @@
                                     <th>Seccion</th>
                                     <th>Paquete</th>
                                     <th>Costo</th>
-                                    <th>Disp</th>
+                                    <th align="center"><i class="fas fa-ticket-alt"></i></th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -170,12 +170,13 @@
                                         </div>
                                         <table id="monto" class="table">
                                             <thead>
-                                            <tr><th>Tickets</th> <th>Costo</th></tr>
+                                            <tr><th>Boleto</th> <th>Fecha</th> <th>Cant</th> <th style="text-align: right;">Costo unitario</th></tr>
                                             </thead>
                                             <tbody>
 
                                             </tbody>
                                         </table>
+                                        <div class="p-4 f-size-14 text-center"><b>Se le cobrará una comisión de 2.9% + 2.5MXN + IVA por transacción.</b></div>
                                         <div class="d-flex flex-justify-center">
                                             <div class="mt-5">
                                                 <a role="button" onclick="irAPago()" class="button success large rounded shadowed">Ir a pagar <span class="mif-chevron-thin-right"></span></a>
@@ -226,7 +227,7 @@
                                     </div>
                                     <div class="cell-md-6">
                                         <label>Número de tarjeta</label>
-                                        <input value="" name="card" id="card" data-conekta="card[number]" onchange="getBrandCard()" type="text" maxlength="16" data-role="input" >
+                                        <input value="" name="card" id="card" data-conekta="card[number]" onchange="getBrandCard()" onkeypress="return validateNumber(event);" type="text" maxlength="16" data-role="input" >
 
                                     </div>
                                     <div class="cell-md-12 my-0 py-0">
@@ -239,16 +240,30 @@
                                         <label>
                                             CVC
                                         </label>
-                                        <input value="" data-conekta="card[cvc]" data-size="120" type="text" maxlength="4" data-role="input" >
+                                        <input value="" data-conekta="card[cvc]" data-size="120" type="text" onkeypress="return validateNumber(event);" maxlength="4" data-role="input" >
                                     </div>
                                     <div class="cell-md-6">
                                         <label>
                                             Fecha de expiración (MM/AA)
                                         </label>
                                         <div class="d-flex flex-row">
-                                            <div><input data-role="input" data-size="100" value="" data-conekta="card[exp_month]"   type="text" maxlength="2" ></div>
-                                            <div class="ml-4"><input data-role="input" data-size="100" value="" data-conekta="card[exp_year]" type="text" maxlength="2" ></div>
+                                            <div><input data-role="input" data-size="100" value="" data-conekta="card[exp_month]"  onkeypress="return validateNumber(event);"  type="text" maxlength="2" ></div>
+                                            <div class="ml-4"><input data-role="input" data-size="100" value="" data-conekta="card[exp_year]" onkeypress="return validateNumber(event);" type="text" maxlength="2" ></div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row mx-1 my-3">
+                                    <div class="cell-md-6">
+                                        <label>
+                                            Email
+                                        </label>
+                                        <input value="{{session('profile')['email']}}" type="email" data-role="input" name="email" id="email" >
+                                    </div>
+                                    <div class="cell-md-6">
+                                        <label>
+                                           Teléfono
+                                        </label>
+                                        <input id="telefono" type="text" onkeypress="return validateNumber(event);" maxlength="10" value="" data-role="input" >
                                     </div>
                                 </div>
                                 <div class="d-flex flex-justify-center">

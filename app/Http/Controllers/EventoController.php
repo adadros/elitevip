@@ -55,27 +55,20 @@ class EventoController extends Controller
             }
         }
         $data['fechas'] = $fecha_arr;
-
         return view('usuario/eventoform',$data);
-        
     }
 
 
     public function getseccion(Request $request){
         if($request->ajax()){
             $id = $request->input('id');
-
             $secciones = DB::table('view_tickets')->select(['idseccion','seccion'])->where([
                 ['idevento', '=', $id ]
             ])->groupBy(['idseccion','seccion'])->get();
-
-
             return response()->json([
                 'secciones' => $secciones,
                 'getdata'=>true
             ]);
-
-
         }
 
     }
@@ -89,13 +82,10 @@ class EventoController extends Controller
                 ['idevento', '=', $id,'and' ],['idseccion','=',$seccion]
             ])->groupBy(['idpaquete','paquete'])->get();
 
-
             return response()->json([
                 'paquetes' => $paquetes,
                 'getdata'=>true
             ]);
-
-
         }
     }
 
@@ -110,9 +100,7 @@ class EventoController extends Controller
             $tickets_available = DB::table('view_tickets')->select(['id','idstatus','estatus','folio','precio','divisa','personas','seccion','paquete','idseccion','idpaquete'])->where([
                 ['fecha','=',$fecha,'and'],['idevento', '=', $id,'and' ],['idseccion','=',$seccion,'and'],['idpaquete','=',$paquete,'and'],['idstatus','=',1]
             ])->get();
-
             /**construyendo template*/
-
             $ticket_template = '
                     
                     <div class="card op-white-hi border-dashed bd-lightTaupe">
@@ -171,55 +159,24 @@ class EventoController extends Controller
 
     public function payform(Request $request){
         if($request->ajax()) {
-
-            /*DB::transaction(function() use ($request, &$tickets_arr ) {
-                $id = $request->input('id');
-                $tickets = $request->input('tickets');
-                foreach ($tickets as $ticket) {
-                        $cantidad = $ticket['cant'];
-                        $fecha = $ticket['fecha'];
-                        $seccion = $ticket['ticket']['idseccion'];
-                        $paquete = $ticket['ticket']['idpaquete'];
-                        $tickets_arr[] = DB::table('view_tickets')->select(['id', 'idstatus', 'estatus', 'folio', 'precio', 'divisa', 'personas', 'seccion', 'paquete'])->where([
-                            ['fecha', '=', $fecha, 'and'], ['idevento', '=', $id, 'and'], ['idseccion', '=', $seccion, 'and'], ['idpaquete', '=', $paquete, 'and'], ['idstatus', '=', 1]
-                        ])->take(intval($cantidad))->get()->toArray();
-
-                }
-            });*/
-                        
             $id = $request->input('id');
             $seccion = $request->input('seccion');
             $paquete = $request->input('paquete');
             $fecha = $request->input('fecha');
             $cantidad = $request->input('cantidad');
-
-
-            $tickets_available = DB::table('view_tickets')->select(['id', 'idstatus', 'estatus', 'folio', 'precio', 'divisa', 'personas', 'seccion', 'paquete'])->where([
+            $tickets_available = DB::table('view_tickets')->select(['id', 'idstatus', 'estatus', 'folio', 'precio', 'divisa', 'personas', 'seccion', 'paquete','fecha', 'idseccion','idpaquete','idevento'])->where([
                 ['fecha', '=', $fecha, 'and'], ['idevento', '=', $id, 'and'], ['idseccion', '=', $seccion, 'and'], ['idpaquete', '=', $paquete, 'and'], ['idstatus', '=', 1]
             ])->take(intval($cantidad))->get();
-
-
             return response()->json([
                 'ticket' => $tickets_available,
-                'id'=>$id,
-                'fecha'=>$fecha,
-                'seccion'=>$seccion,
-                'paquete'=>$paquete,
                 'profile' => session('profile')['nombre'].' '.session('profile')['apellido'],
-                //'cantidad' => $cantidad,
+                'cantidad' => $cantidad,
+                'fecha' => $this->obtenerFechaEnLetra($fecha),
                 'getdata' => true
             ]);
         }
-
     }
 
-    public function getTicketsAvailable($id,$fecha,$seccion,$paquete,$cantidad){
-
-
-
-    }
-
-    
     public function obtenerFechaEnLetra($fecha){
         $dia= $this->conocerDiaSemanaFecha($fecha);
         $num = date("j", strtotime($fecha));

@@ -28,9 +28,12 @@ class ProfileController extends Controller
             ->whereRaw('u.id = ?',[Auth::id()])
             ->get()->first();
 
-
         $arr['nombre'] = $profile->nombre;
         $arr['apellido'] = $profile->apellido;
+        $arr['email'] = $profile->email;
+        $arr['telefono'] = $profile->telefono;
+        $arr['uid'] = $profile->id;
+
 
         return $arr;
     }

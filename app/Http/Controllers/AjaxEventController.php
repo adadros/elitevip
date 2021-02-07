@@ -18,7 +18,6 @@ class AjaxEventController extends Controller
         $this->middleware(['auth','auth.admin']);
     }
 
-
     public function uploadPortada(Request $request){
         $validacion = Validator::make(
             $request->all(),[

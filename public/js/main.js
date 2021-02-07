@@ -4,6 +4,10 @@ var mtr = $;
 var activity = null;
 var _evento = {
 	paquetes:[],
+	detalles:[],
+	productos:[],
+	total:0,
+	divisa:''
 };
 var _paquetes_selected=null;
 
@@ -22,17 +26,23 @@ function senTken(){
 	var titulo = jq("#evento_titulo").val();
 	var token = jq("#conektaTokenId").val();
 	var ticket_detalle = jq('#ticket_detalle');
+	var telefono = jq('#telefono').val();
 
 	var params = {
 		name:name,
 		descripcion:titulo,
 		brand: Conekta.card.getBrand(card),
 		tipo:'card',
+		telefono:telefono,
 		tok:token,
 		card:card,
 		invitados:ticket_detalle[0].invitados,
-		detalle:ticket_detalle[0].detalle
+		detalles:_evento.detalles,
+		productos:_evento.productos,
+		total: _evento.total,
+		divisa:_evento.divisa
 	};
+	//console.log(params);
 
 	doAjax('/evento/pagar', params, function (data) {
 		if(data.getdata) {
@@ -41,48 +51,20 @@ function senTken(){
 	});
 
 
-
-
-	//console.log(card,token,ticket_detalle[0].invitados, ticket_detalle[0].detalle);
-	
-/*
-	doAjax('/evento/secciones', {id: evento}, function (data) {
-		if (data.getdata) {
-			jq(data.secciones).each(function (i, v) {
-				var option_child = document.createElement('option');
-				option_child.value = v.idseccion;
-				option_child.innerHTML = v.seccion;
-				select.appendChild(option_child);
-
-			});
-			document.getElementById('secciones').appendChild(select);
-			jq('#secciones').removeClass('d-none');
-		}
-	})
-*/
-
-	//doAjax(url,params,funcion);
-
-
-	//var params=jq("#card-form").serialize();
-
-
-
-
-
-	//let url="pay.php";
-
-	/*
-	$.post(url,params,function(data){
-		if(data=="1"){
-			alert("Se realizo el pago :D");
-			clearFrm();
-		}else{
-			alert(data)
-		}
-
-	})*/
 }
+
+
+
+function validateNumber(event) {
+	var key = window.event ? event.keyCode : event.which;
+	if (event.keyCode === 8 || event.keyCode === 46) {
+		return true;
+	} else if ( key < 48 || key > 57 ) {
+		return false;
+	} else {
+		return true;
+	}
+};
 
 
 
@@ -353,6 +335,7 @@ function reseteaBoletoAvailable(){
 
 function back_apartar(){
 	jq('#apartar').removeClass('d-none');
+	jq('#titulo_apartar_container').removeClass('d-none');
 	jq('#configurar').addClass('d-none');
 	jq('#user_container').html('');
 	ejecutaPaso('prev');
@@ -360,17 +343,21 @@ function back_apartar(){
 
 /**funcion para crear un user para ticket*/
 function createUserTicket(ticket){
-	var ticket = '<div class="card bg-black border bd-lightTaupe ticket-folio my-2" data-folio="'+ticket.folio+'" data-seccion="'+ticket.seccion+'" data-paquete="+ticket.paquete+" >' +
+	var ticket = '<div class="card bg-black border bd-lightTaupe ticket-folio my-2" data-tid="'+ticket.id+'" data-folio="'+ticket.folio+'" data-seccion="'+ticket.seccion+'" data-paquete="+ticket.paquete+" >' +
 		'<div class="card-header op-darkTaupe-hi fg-lightTaupe border-none">' +
 		'<div>Invitados por boleto <b class="fg-lightTaupe">('+ticket.personas+')</b></div>' +
-		'<div>Seccion: '+ticket.seccion+' - Paquete '+ticket.paquete+' - Folio: ' + ticket.folio +' </div>'+
+		'<div>Folio: ' + ticket.folio +' </div>'+
 		'</div>' +
 		'<div class="card-content op-black-hi py-2">' +
 		'' + createInvitado(ticket.personas)+
 		'</div>' +
 		'</div>';
 
-	return ticket;
+	var tfolio = jq('<div/>',{
+		html:ticket
+	});
+
+	return tfolio;
 }
 
 function ejecutaPaso(paso){
@@ -384,9 +371,10 @@ function validateInvitados(){
 	var errors = false;
 	jq('.ticket-folio').each(function(idx,tick){
 		var folio = jq(tick).attr('data-folio');
+		var idt = jq(tick).attr('data-tid');
 		jq(tick).find('.user-tickets').each(function(uindx, uticket){
 			if(jq(uticket).find('input').val()!=""){
-				users.push({ invitado:jq(uticket).find('input').val().toUpperCase(), folio:folio  })
+				users.push({ invitado:jq(uticket).find('input').val().toUpperCase(), folio:folio, id:idt  })
 			}else{
 				errors=true;
 			}
@@ -403,30 +391,48 @@ function pasoPago(){
 		jq('#configurar').addClass('d-none');
 		var ticket_detalle = jq('#ticket_detalle');
 		var monto_table = jq('#monto > tbody');
-
-
-		if (ticket_detalle[0].detalle.length > 0) {
-			var tickets = ticket_detalle[0].detalle;
+		if (_evento.detalles.length>0) {
+			var tickets = _evento.detalles;
 			var sumaTotal = 0;
-
 			/**tickets folios*/
 			ticket_detalle[0].invitados = invitados.users;
-			//console.log(ticket_detalle[0].invitados);
+			var divisa = '';
 			/**tickets folios*/
-
-			tickets.forEach(function (ticket, ind) {
-				var tr = jq('<tr/>', {
-					html: '<td>#' + ticket.folio + ' - ' + ticket.seccion + ' - paquete: ' + ticket.paquete + '</td><td>$' + ticket.precio + ' ' + ticket.divisa + '</td>'
-				});
-				monto_table.append(tr);
-				sumaTotal += parseFloat(ticket.precio);
+			tickets.forEach(function (ticket_arr,ind) {
+				if(ticket_arr.length>0){
+					var cantidad_temp = parseInt(ticket_arr.length);
+					var ticket = ticket_arr[0];
+					var tr = jq('<tr/>', {
+						html: '<td>'+ ticket.seccion + ' - ' + ticket.paquete + '</td><td>'+ticket.fecha+'</td><td>'+cantidad_temp+' pza(s)</td><td align="right">$' + ticket.precio + ' ' + ticket.divisa+'</td>'
+					});
+					var producto = {
+						name: 'Boleto fecha '+ticket.fecha,
+						description: 'seccion: '+ticket.seccion+' paquete:'+ticket.paquete,
+						unit_price: ticket.precio * 100,
+						quantity: cantidad_temp
+					};
+					var producto_detalle = {
+						cantidad:cantidad_temp,
+						idseccion:ticket.idseccion,
+						idpaquete:ticket.idpaquete,
+						idevento:ticket.idevento,
+						precio:ticket.precio
+					};
+					_evento.productos.push(producto);
+					_evento.detalles.push(producto_detalle);
+					monto_table.append(tr);
+					sumaTotal += parseFloat(ticket.precio*cantidad_temp);
+					divisa = ticket.divisa;
+				}
 			});
 			var stTr = jq('<tr/>', {
 				class: 'u-hline',
-				html: '<td><b>Total a pagar</b></td><td class="f-size-18 text-bold">$' + sumaTotal + ' ' + tickets[0].divisa + '</td>'
+				html: '<td><b>Total a pagar</b></td><td colspan="2">&nbsp;</td><td align="right" class="f-size-18 text-bold">$' + sumaTotal + ' ' + divisa + '</td>'
 			});
 			monto_table.append(stTr);
-			ticket_detalle[0].monto = '$'+sumaTotal+' '+tickets[0].divisa;
+			ticket_detalle[0].monto = '$'+sumaTotal+' '+divisa;
+			_evento.total = sumaTotal;
+			_evento.divisa = divisa;
 
 		}
 		ejecutaPaso('next');
@@ -508,6 +514,7 @@ function usersForm(){
 			paquete:val.ticket.idpaquete
 		};
 		var _promesa = await doPromise('/evento/payform',params);
+		var detalles = [];
 
 		/**armo los usuarios*/
 		if(_promesa.getdata){
@@ -522,89 +529,31 @@ function usersForm(){
 				var ticket_detalle = jq('#ticket_detalle');
 				var detalle_arr = [];
 				var user_container;
+				//console.log(_promesa.ticket[0]);
+				var _fecha = jq('<div/>',{
+					class:'row',
+					html:'<div class="cell-md-12 pb-1 text-right fg-white" style="border-bottom:1px solid rgba(155,155,155,.2);">'+_promesa.ticket[0].seccion+' - '+_promesa.ticket[0].paquete+' - <b class="fg-green">'+_promesa.fecha+'</b></div>'
+				});
+				jq('#user_container').append(_fecha);
 				_promesa.ticket.forEach(function(val,ind){
-					user_container+=createUserTicket(val);
+					console.log(val);
+					jq('#user_container').append(createUserTicket(val));
 					detalle_arr.push(val);
 				});
-				ticket_detalle[0].detalle = detalle_arr;
-				jq('#user_container').html(user_container);
-				jq('#user_container input:first').val(_promesa.profile);
+				_evento.detalles.push(detalle_arr);
 
+				//ticket_detalle[0].detalle;
+				//jq('#user_container').append(user_container);
 
+				//jq('#user_container input:first').val(_promesa.profile);
 				//Precarga de datos del ticket
 			}
 		}
-
 
 		/**armo los usuarios*/
 
-
-
-
 	});
 
-	//console.log(_evento.paquetes);
-
-
-
-
-	//doRecursiveAjaxEventos('/evento/payform',_evento.paquetes,0);
-
-
-
-
-
-	//var element_cant = Metro.getPlugin(document.getElementById('cantidad'),'spinner');
-
-	/*$.post("http://website.com", JSON.stringify(myArray)).then(
-		function(response){
-			console.log(response);
-		},
-		function(xhr){
-			console.log(xhr.status, xhr.statusText);
-		}
-	)*/
-
-	/*doAjax('/evento/payform', {
-		tickets:_evento.paquetes,
-		id:evento
-	},function(data){
-		console.log(data);
-	});*/
-
-	//iniciaLoading();
-
-	/*
-	doAjax('/evento/payform', {
-		id: evento,
-		seccion: select_seccion.val(),
-		paquete: select_paquete.val(),
-		fecha: select_fecha.val(),
-		cantidad: element_cant.val()
-	}, function (data) {
-		var user_container = '';
-		if(data.getdata){
-			closeLoading();
-			if(data.ticket.length>0){
-				//Precarga de datos del ticket
-				jq('#apartar').addClass('d-none');
-				ejecutaPaso('next');
-				jq('#configurar').removeClass('d-none');
-				var ticket_detalle = jq('#ticket_detalle');
-				var detalle_arr = [];
-				data.ticket.forEach(function(val,ind){
-					user_container+=createUserTicket(val);
-					detalle_arr.push(val);
-				});
-				ticket_detalle[0].detalle = detalle_arr;
-				jq('#user_container').html(user_container);
-				jq('#user_container input:first').val(data.profile);
-				//Precarga de datos del ticket
-			}
-		}
-
-	})
-*/
 
 
 }
