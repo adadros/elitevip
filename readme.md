@@ -2,7 +2,7 @@
 Aplicación para compra de tickets de eventos usando Api de conekta.
 
 
-<img src="https://eliteexperience.vip/images/elitevip.jpg">
+<img src="https://eliteexperience.vip/public/images/elitevip.jpg" width="400" height="400">
 
 
 
