@@ -1,13 +1,10 @@
 ## Eliteexperience.vip
-Applicacion para compra de tickets de eventos usando Api de conekta.
+Aplicación para compra de tickets de eventos usando Api de conekta.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<img src="https://eliteexperience.vip/images/elitevip.jpg">
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
